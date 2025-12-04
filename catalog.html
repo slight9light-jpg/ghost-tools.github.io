@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог - Ghost Tools</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff006e;
+            --accent: #00d4ff;
+            --dark: #0a0a0a;
+            --text: #ffffff;
+            --gray: #1a1a1a;
+            --border: #222222;
+        }
+
+        /* Page base styles (match site.html) */
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Header layout (HTML stays in <body>) */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--dark);
+            padding: 1rem 2rem;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .logo img {
+            height: 40px;
+            border-radius: 6px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            justify-self: center;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            transition: color 0.3s;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a.active {
+        }
+
+        .balance-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .balance {
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .btn-replenish {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            color: var(--dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-replenish:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-profile {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            color: var(--dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-profile:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Основной контент */
+        main {
+            margin-top: 60px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 2rem;
+        }
+
+        .catalog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .catalog-header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--gray);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            border: none;
+            color: var(--dark);
+        }
+
+        /* Сетка товаров */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-game {
+            display: inline-block;
+            background: var(--gray);
+            color: var(--accent);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            min-height: 40px;
+        }
+
+        .product-features {
+            list-style: none;
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        .product-features li:before {
+            content: "✓ ";
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-buy {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            color: var(--dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-buy:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Пагинация */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .pagination a,
+        .pagination span {
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .pagination a:hover {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            border: none;
+            color: var(--dark);
+        }
+
+        .pagination span.active {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            border: none;
+            color: var(--dark);
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background: var(--dark);
+            margin: 10% auto;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            border-top: 3px solid var(--accent);
+        }
+
+        .close {
+            color: var(--text);
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: var(--accent);
+        }
+
+        .modal h2 {
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .modal-form input,
+        .modal-form select {
+            padding: 12px;
+            background: var(--gray);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .modal-form input:focus,
+        .modal-form select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-submit {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            color: var(--dark);
+            border: none;
+            padding: 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .catalog-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="Ghost Tools">
+                GHOST TOOLS
+            </a>
+            <nav class="nav">
+                <a href="index.html">ГЛАВНАЯ</a>
+                <a href="catalog.html">КАТАЛОГ</a>
+                <a href="account.html">АККАУНТ</a>
+            </nav>
+            <div class="header-right">
+                <div class="balance-container">
+                    <span>💰</span>
+                    <span class="balance" id="balance">0.00 ₽</span>
+                </div>
+                <button class="btn-replenish" onclick="openReplenishModal()">💸Пополнить</button>
+                <button class="btn-profile" id="headerAuthBtn" onclick="handleHeaderAuth()">👤Профиль</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="catalog-header">
+            <h1>📦 Каталог читов</h1>
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterProducts('all')">Все</button>
+                <button class="filter-btn" onclick="filterProducts('CS2')">CS2</button>
+                <button class="filter-btn" onclick="filterProducts('Valorant')">Valorant</button>
+                <button class="filter-btn" onclick="filterProducts('Rust')">Rust</button>
+                <button class="filter-btn" onclick="filterProducts('PUBG')">PUBG</button>
+            </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Товары будут загружены JS -->
+        </div>
+
+        <div class="pagination">
+            <span class="active">1</span>
+            <a href="#">2</a>
+            <a href="#">3</a>
+        </div>
+    </main>
+
+    <!-- Модальное окно покупки -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePurchaseModal()">&times;</span>
+            <h2 id="modalTitle">Покупка товара</h2>
+            <form class="modal-form" onsubmit="completePurchase(event)">
+                <input type="email" placeholder="Email" required>
+                <input type="text" placeholder="Ник в игре" required>
+                <input type="tel" placeholder="Номер телефона" required>
+                <select required>
+                    <option value="">Выберите способ оплаты</option>
+                    <option value="yandex">Yandex.Kassa</option>
+                    <option value="sberbank">Сбербанк</option>
+                    <option value="crypto">Криптовалюта</option>
+                </select>
+                <button type="submit" class="btn-submit">Оплатить</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно пополнения -->
+    <div id="replenishModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeReplenishModal()">&times;</span>
+            <h2>💳 Пополнить баланс</h2>
+            <form class="modal-form" onsubmit="replenishBalance(event)">
+                <input type="number" id="replenishAmount" placeholder="Сумма (₽)" min="100" max="50000" required>
+                <select required>
+                    <option value="">Выберите способ оплаты</option>
+                    <option value="yandex">Yandex.Kassa</option>
+                    <option value="sberbank">Сбербанк</option>
+                    <option value="crypto">Криптовалюта</option>
+                </select>
+                <button type="submit" class="btn-submit">Пополнить</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Данные товаров
+        const products = [
+            { id: 1, game: 'CS2', name: 'ESP Full', price: 199, emoji: '👁️', features: ['Враги на стене', 'HP/броня', 'Оружие'] },
+            { id: 2, game: 'CS2', name: 'Aimbot Pro', price: 299, emoji: '🎯', features: ['Автонаведение', 'Плавность', 'Обход VAC'] },
+            { id: 3, game: 'CS2', name: 'Bundle Pro', price: 399, emoji: '🔥', features: ['ESP + Aimbot', '24/7 поддержка', 'Обновления'] },
+            { id: 4, game: 'Valorant', name: 'Valorant ESP', price: 179, emoji: '👁️', features: ['Видимость врагов', 'Мини-радар', 'Антивырез'] },
+            { id: 5, game: 'Valorant', name: 'Valorant Aim', price: 249, emoji: '🎯', features: ['Точный прицел', 'Для Glitch', 'Быстро'] },
+            { id: 6, game: 'Valorant', name: 'Ultimate Pack', price: 349, emoji: '👑', features: ['Всё включено', 'ВИП поддержка', 'Гарантия'] },
+            { id: 7, game: 'Rust', name: 'Rust Radar', price: 189, emoji: '🗺️', features: ['Карта врагов', 'Радар базы', 'Скрытый'] },
+            { id: 8, game: 'Rust', name: 'Rust Aim', price: 219, emoji: '🎯', features: ['Авто-прицел', 'На расстояние', 'Незаметно'] },
+            { id: 9, game: 'Rust', name: 'Rust Mega', price: 299, emoji: '💎', features: ['Radar + Aim', 'Вечный доступ', '30 дней гарант'] },
+            { id: 10, game: 'PUBG', name: 'PUBG ESP+Aim', price: 229, emoji: '📡', features: ['Враги в виду', 'Автоцель', 'В тени'] },
+            { id: 11, game: 'PUBG', name: 'PUBG Wallhack', price: 199, emoji: '👻', features: ['Сквозь стены', 'На всю карту', 'Легко'] },
+            { id: 12, game: 'PUBG', name: 'PUBG Pro', price: 329, emoji: '🌟', features: ['Полный набор', 'Поддержка', 'Автообнов'] }
+        ];
+
+        let currentFilter = 'all';
+        let currentProduct = null;
+
+        // Загрузка товаров
+        function loadProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            const filtered = currentFilter === 'all' 
+                ? products 
+                : products.filter(p => p.game === currentFilter);
+
+            filtered.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-image">${product.emoji}</div>
+                    <div class="product-info">
+                        <div class="product-game">${product.game}</div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-description">Лучший выбор для игры</div>
+                        <ul class="product-features">
+                            ${product.features.map(f => `<li>${f}</li>`).join('')}
+                        </ul>
+                        <div class="product-footer">
+                            <div class="product-price">${product.price} ₽</div>
+                            <button class="btn-buy" onclick="openPurchaseModal(${product.id})">Купить</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Фильтрация
+        function filterProducts(game) {
+            currentFilter = game;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            loadProducts();
+        }
+
+        // Модальные окна
+        function openPurchaseModal(productId) {
+            const product = products.find(p => p.id === productId);
+            currentProduct = product;
+            document.getElementById('modalTitle').textContent = `Покупка: ${product.name} (${product.price} ₽)`;
+            document.getElementById('purchaseModal').style.display = 'block';
+        }
+
+        function closePurchaseModal() {
+            document.getElementById('purchaseModal').style.display = 'none';
+        }
+
+        function openReplenishModal() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                alert('❌ Вы не авторизованы. Пожалуйста, войдите в свой аккаунт.');
+                window.location.href = 'login.html';
+                return;
+            }
+            document.getElementById('replenishModal').style.display = 'block';
+        }
+
+        function closeReplenishModal() {
+            document.getElementById('replenishModal').style.display = 'none';
+        }
+
+        function completePurchase(event) {
+            event.preventDefault();
+            alert(`✅ Спасибо за покупку ${currentProduct.name} за ${currentProduct.price} ₽!\n\nУ вас есть 24 часа на загрузку.`);
+            closePurchaseModal();
+        }
+
+        function replenishBalance(event) {
+            event.preventDefault();
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                alert('❌ Вы не авторизованы');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const amount = parseFloat(document.getElementById('replenishAmount').value);
+            const user = JSON.parse(currentUser);
+            
+            // Загрузим БД в формате BD.txt
+            let dbString = localStorage.getItem('ghostToolsUsers');
+            if (!dbString) {
+                const defaultUsers = [
+                    'admin admin123 5000.00',
+                    'testuser password123 1500.50',
+                    'player1 gamer2024 299.99',
+                    'pvp_pro secure_pass 0.00',
+                    'ghost_hunter mysecret 3200.00'
+                ];
+                dbString = defaultUsers.join('\n');
+                localStorage.setItem('ghostToolsUsers', dbString);
+            }
+
+            let lines = dbString.split('\n').filter(line => line.trim());
+            lines = lines.map(line => {
+                const parts = line.trim().split(' ');
+                if (parts.length >= 3 && parts[0] === user.login) {
+                    const oldBalance = parseFloat(parts[2]) || 0;
+                    const newBalance = oldBalance + amount;
+                    return `${parts[0]} ${parts[1]} ${newBalance.toFixed(2)}`;
+                }
+                return line;
+            });
+            
+            // Попробуем обновить баланс на сервере
+            const serverUrl = 'http://localhost:3000';
+            fetch(serverUrl + '/replenish', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ login: user.login, amount: amount })
+            }).then(async resp => {
+                if (!resp.ok) throw new Error('server replenish failed');
+                const usersResp = await fetch(serverUrl + '/users');
+                if (usersResp.ok) {
+                    const text = await usersResp.text();
+                    localStorage.setItem('ghostToolsUsers', text);
+                }
+                const dbUsers = parseUsersDatabase(localStorage.getItem('ghostToolsUsers'));
+                user.balance = dbUsers[user.login]?.balance || user.balance;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                loadBalance();
+                alert(`✅ Баланс пополнен на ${amount} ₽`);
+                closeReplenishModal();
+                document.getElementById('replenishAmount').value = '';
+            }).catch(err => {
+                console.warn('replenish server failed, falling back to local', err);
+                localStorage.setItem('ghostToolsUsers', lines.join('\n'));
+                user.balance = user.balance ? parseFloat(user.balance) + amount : amount;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                loadBalance();
+                alert(`✅ Баланс пополнен локально на ${amount} ₽`);
+                closeReplenishModal();
+                document.getElementById('replenishAmount').value = '';
+            });
+        }
+
+        function goToAccount() {
+            window.location.href = 'account.html';
+        }
+
+        function loadBalance() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                document.getElementById('balance').textContent = parseFloat(user.balance || 0).toFixed(2) + ' ₽';
+            } else {
+                document.getElementById('balance').textContent = '0.00 ₽';
+            }
+        }
+
+        // Закрытие модалей при клике вне
+        window.onclick = function(event) {
+            const purchaseModal = document.getElementById('purchaseModal');
+            const replenishModal = document.getElementById('replenishModal');
+            if (event.target == purchaseModal) purchaseModal.style.display = 'none';
+            if (event.target == replenishModal) replenishModal.style.display = 'none';
+        }
+
+        // Инициализация
+        loadBalance();
+        loadProducts();
+    </script>
+    <script>
+        // Подсветка активной вкладки навигации
+        (function markActive(){
+            try{
+                const path = window.location.pathname.split('/').pop() || 'index.html';
+                document.querySelectorAll('nav a').forEach(a=>{
+                    const href = a.getAttribute('href');
+                    if(!href) return;
+                    if(href === path || (path === '' && href.includes('index.html')) ) a.classList.add('active');
+                });
+            }catch(e){/* ignore */}
+        })();
+    </script>
+</body>
+</html>

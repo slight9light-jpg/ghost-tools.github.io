@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost Tools - Premium Game Cheats</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff006e;
+            --accent: #00d4ff;
+            --dark: #0a0a0a;
+            --text: #ffffff;
+            --text-light: #b0b0b0;
+            --border: #222222;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Шапка */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--dark);
+            padding: 1rem 2rem;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .logo img {
+            height: 40px;
+            width: 40px;
+            border-radius: 6px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            justify-self: center;
+            justify-content: center;
+        }
+
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            transition: color 0.3s;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .nav a:hover {
+            color: var(--primary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .balance-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .balance {
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .btn-replenish,
+        .btn-profile {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            color: var(--dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-replenish:hover,
+        .btn-profile:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Hero */
+        .hero {
+            margin-top: 60px;
+            padding: 100px 20px 80px;
+            text-align: center;
+            background: var(--dark);
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Статистика */
+        .stats {
+            padding: 60px 20px;
+            background: var(--dark);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px 0;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Товары */
+        .products {
+            padding: 80px 20px;
+            background: var(--dark);
+        }
+
+        .section-title {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .products-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .product-game {
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .product-description {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .product-card .btn {
+            padding: 10px 20px;
+            font-size: 12px;
+        }
+
+        /* Как мы работаем */
+        .how-it-works {
+            padding: 80px 20px;
+            background: var(--dark);
+        }
+
+        .steps-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .step {
+            position: relative;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .step-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .step-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Особенности */
+        .features {
+            padding: 80px 20px;
+            background: var(--dark);
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-item {
+            text-align: left;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            border-color: var(--primary);
+            background: rgba(255, 0, 110, 0.02);
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Категории игр */
+        .games {
+            padding: 80px 20px;
+            background: var(--dark);
+        }
+
+        .games-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .game-card:hover {
+            border-color: var(--accent);
+            background: rgba(0, 212, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .game-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .game-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .game-count {
+            font-size: 12px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* CTA блок */
+        .cta {
+            padding: 80px 20px;
+            background: var(--dark);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .cta p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.98);
+            padding: 50px 20px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .footer-section h4 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            background: var(--dark);
+            margin: 5% auto;
+            padding: 40px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .modal h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--text);
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modal-form input {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .modal-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .modal-form input::placeholder {
+            color: var(--text-light);
+        }
+
+        .modal-form select {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .modal-form select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .modal-form button {
+            padding: 12px;
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .modal-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.3);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            .header-right {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .nav {
+                gap: 20px;
+                font-size: 12px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="Ghost Tools">
+                GHOST TOOLS
+            </a>
+            <nav class="nav">
+                <a href="index.html">ГЛАВНАЯ</a>
+                <a href="catalog.html">КАТАЛОГ</a>
+                <a href="account.html">АККАУНТ</a>
+            </nav>
+            <div class="header-right">
+                <div class="balance-container">
+                    <span>💰</span>
+                    <span class="balance" id="balance">0.00 ₽</span>
+                </div>
+                <button class="btn-replenish" onclick="openReplenishModal()">💸Пополнить</button>
+                <button class="btn-profile" id="headerAuthBtn" onclick="handleHeaderAuth()">👤Профиль</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>ЛУЧШИЕ ЧИТЫ<br><span>САМЫЕ НИЗКИЕ ЦЕНЫ</span></h1>
+        <p>Магазин высококачественных читов для популярных игр. Полная поддержка и регулярные обновления</p>
+        <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="window.location.href='catalog.html'">
+                ПЕРЕЙТИ В КАТАЛОГ
+            </button>
+            <button class="btn btn-secondary" onclick="window.open('https://t.me/ghost_too1s')">
+                TELEGRAM
+            </button>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Читов в каталоге</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Популярных игр</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Довольных клиентов</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Товары -->
+    <section class="products" id="products">
+        <h2 class="section-title">ПОПУЛЯРНЫЕ <span>ЧИТЫ</span></h2>
+        <div class="products-grid">
+            <!-- CS2 -->
+            <div class="product-card">
+                <div class="product-game">Counter-Strike 2</div>
+                <div class="product-name">Aimbot Pro</div>
+                <div class="product-description">Профессиональный aimbot с полной регулировкой и сглаживанием</div>
+                <div class="product-footer">
+                    <span class="product-price">₽299</span>
+                    <button class="btn btn-primary" onclick="openModal('Aimbot Pro - CS2', 299)">КУПИТЬ</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-game">Counter-Strike 2</div>
+                <div class="product-name">Wallhack</div>
+                <div class="product-description">Видение всех врагов через стены и объекты</div>
+                <div class="product-footer">
+                    <span class="product-price">₽199</span>
+                    <button class="btn btn-primary" onclick="openModal('Wallhack - CS2', 199)">КУПИТЬ</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-game">Counter-Strike 2</div>
+                <div class="product-name">Full Combo</div>
+                <div class="product-description">Полный набор: Aimbot + Wallhack + ESP</div>
+                <div class="product-footer">
+                    <span class="product-price">₽499</span>
+                    <button class="btn btn-primary" onclick="openModal('Full Combo - CS2', 499)">КУПИТЬ</button>
+                </div>
+            </div>
+
+            <!-- Valorant -->
+            <div class="product-card">
+                <div class="product-game">Valorant</div>
+                <div class="product-name">Aimbot Basic</div>
+                <div class="product-description">Надежный базовый aimbot для Valorant</div>
+                <div class="product-footer">
+                    <span class="product-price">₽249</span>
+                    <button class="btn btn-primary" onclick="openModal('Aimbot Basic - Valorant', 249)">КУПИТЬ</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-game">Valorant</div>
+                <div class="product-name">ESP Premium</div>
+                <div class="product-description">Премиум отслеживание всех врагов на карте</div>
+                <div class="product-footer">
+                    <span class="product-price">₽349</span>
+                    <button class="btn btn-primary" onclick="openModal('ESP Premium - Valorant', 349)">КУПИТЬ</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-game">Valorant</div>
+                <div class="product-name">Full Bundle</div>
+                <div class="product-description">Все читы вместе с ежемесячной подпиской</div>
+                <div class="product-footer">
+                    <span class="product-price">₽599</span>
+                    <button class="btn btn-primary" onclick="openModal('Full Bundle - Valorant', 599)">КУПИТЬ</button>
+                </div>
+            </div>
+
+            <!-- Rust -->
+            <div class="product-card">
+                <div class="product-game">Rust</div>
+                <div class="product-name">Aimbot</div>
+                <div class="product-description">Точный aimbot для PvP боев в Rust</div>
+                <div class="product-footer">
+                    <span class="product-price">₽199</span>
+                    <button class="btn btn-primary" onclick="openModal('Aimbot - Rust', 199)">КУПИТЬ</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-game">Rust</div>
+                <div class="product-name">ESP + Radar</div>
+                <div class="product-description">ESP и визуальный радар на карте</div>
+                <div class="product-footer">
+                    <span class="product-price">₽279</span>
+                    <button class="btn btn-primary" onclick="openModal('ESP + Radar - Rust', 279)">КУПИТЬ</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-game">Rust</div>
+                <div class="product-name">Full Suite</div>
+                <div class="product-description">Полный набор всех функций для Rust</div>
+                <div class="product-footer">
+                    <span class="product-price">₽449</span>
+                    <button class="btn btn-primary" onclick="openModal('Full Suite - Rust', 449)">КУПИТЬ</button>
+                </div>
+            </div>
+
+            <!-- PUBG -->
+            <div class="product-card">
+                <div class="product-game">PUBG</div>
+                <div class="product-name">Wallhack</div>
+                <div class="product-description">Видение врагов через препятствия</div>
+                <div class="product-footer">
+                    <span class="product-price">₽179</span>
+                    <button class="btn btn-primary" onclick="openModal('Wallhack - PUBG', 179)">КУПИТЬ</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-game">PUBG</div>
+                <div class="product-name">Aimbot</div>
+                <div class="product-description">Автоматическое нацеливание с подстройкой</div>
+                <div class="product-footer">
+                    <span class="product-price">₽229</span>
+                    <button class="btn btn-primary" onclick="openModal('Aimbot - PUBG', 229)">КУПИТЬ</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-game">PUBG</div>
+                <div class="product-name">Complete Pack</div>
+                <div class="product-description">Все инструменты для доминирования в PUBG</div>
+                <div class="product-footer">
+                    <span class="product-price">₽379</span>
+                    <button class="btn btn-primary" onclick="openModal('Complete Pack - PUBG', 379)">КУПИТЬ</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Как мы работаем -->
+    <section class="how-it-works" id="how">
+        <h2 class="section-title">КАК МЫ <span>РАБОТАЕМ</span></h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-title">Выбор игры</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-title">Выбор чита</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-title">Оплата</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-title">Получение доступа</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Игры -->
+    <section class="games">
+        <h2 class="section-title">ПОДДЕРЖИВАЕМЫЕ <span>ИГРЫ</span></h2>
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="game-icon">🎮</div>
+                <div class="game-name">Counter-Strike 2</div>
+                <div class="game-count">12 читов</div>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">⚡</div>
+                <div class="game-name">Valorant</div>
+                <div class="game-count">10 читов</div>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🏜️</div>
+                <div class="game-name">Rust</div>
+                <div class="game-count">8 читов</div>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🛬</div>
+                <div class="game-name">PUBG</div>
+                <div class="game-count">9 читов</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Особенности -->
+    <section class="features" id="features">
+        <h2 class="section-title">ПОЧЕМУ <span>GHOST TOOLS</span></h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-title">🔒 Безопасность</div>
+                <div class="feature-text">Приватные читы с высоким уровнем скрытности и защиты</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">⚡ Мгновенная доставка</div>
+                <div class="feature-text">Получите доступ за несколько минут после оплаты</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">👥 24/7 Поддержка</div>
+                <div class="feature-text">Наша команда всегда готова помочь вам</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">🔄 Обновления</div>
+                <div class="feature-text">Регулярно обновляем читы под новые версии</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">💎 Премиум качество</div>
+                <div class="feature-text">Лучшие функции и самые конкурентные цены</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">🌍 Глобальная доставка</div>
+                <div class="feature-text">Доступно для игроков из любой точки мира</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2>НАЧНИТЕ ИСПОЛЬЗОВАТЬ GHOST TOOLS УЖЕ СЕЙЧАС</h2>
+            <p>Присоединяйтесь к тысячам довольных клиентов и получайте доступ к лучшим читам</p>
+            <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">
+                ПЕРЕЙТИ В КАТАЛОГ
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Меню</h4>
+                <div class="footer-links">
+                    <a href="#products">Каталог</a>
+                    <a href="#how">Как работать</a>
+                    <a href="#features">Особенности</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Компания</h4>
+                <div class="footer-links">
+                    <a href="#">О нас</a>
+                    <a href="#">Контакты</a>
+                    <a href="#">Поддержка</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Соцсети</h4>
+                <div class="footer-links">
+                    <a href="https://t.me/ghost_tools" target="_blank">Telegram</a>
+                    <a href="#">Discord</a>
+                    <a href="#">VK</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 GHOST TOOLS. Все права защищены. Разработка: Ghost Tools Team</p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Оформление покупки</h2>
+            <form class="modal-form">
+                <input type="text" id="productName" readonly placeholder="Название товара">
+                <input type="text" id="productPrice" readonly placeholder="Цена">
+                <input type="email" placeholder="Ваш Email" required>
+                <input type="text" placeholder="Никнейм в игре" required>
+                <input type="tel" placeholder="Номер телефона" required>
+                <button type="button" onclick="completePurchase()">ОПЛАТИТЬ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно пополнения -->
+    <div id="replenishModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeReplenishModal()">&times;</span>
+            <h2>💳 Пополнить баланс</h2>
+            <form class="modal-form" onsubmit="replenishBalance(event)">
+                <input type="number" id="replenishAmount" placeholder="Сумма (₽)" min="100" max="50000" required>
+                <select required>
+                    <option value="">Выберите способ оплаты</option>
+                    <option value="yandex" selected>Yandex.Kassa</option>
+                    <option value="sberbank">Сбербанк</option>
+                    <option value="crypto">Криптовалюта</option>
+                </select>
+                <button type="submit">Пополнить</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(productName, price) {
+            document.getElementById('purchaseModal').style.display = 'block';
+            document.getElementById('productName').value = productName;
+            document.getElementById('productPrice').value = '₽' + price;
+        }
+
+        function closeModal() {
+            document.getElementById('purchaseModal').style.display = 'none';
+        }
+
+        function completePurchase() {
+            alert('✅ Спасибо за покупку! Проверьте Telegram-бота для получения доступа.');
+            closeModal();
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('purchaseModal');
+            const replenishModal = document.getElementById('replenishModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+            if (event.target == replenishModal) {
+                replenishModal.style.display = 'none';
+            }
+        }
+
+        // Пополнение баланса
+        function openReplenishModal() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                alert('❌ Вы не авторизованы. Пожалуйста, войдите в свой аккаунт.');
+                window.location.href = 'login.html';
+                return;
+            }
+            document.getElementById('replenishModal').style.display = 'block';
+        }
+
+        function closeReplenishModal() {
+            document.getElementById('replenishModal').style.display = 'none';
+        }
+
+        function replenishBalance(event) {
+            event.preventDefault();
+            try {
+                const currentUser = localStorage.getItem('currentUser');
+                if (!currentUser) {
+                    alert('❌ Вы не авторизованы');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                const amountRaw = document.getElementById('replenishAmount').value;
+                const amount = parseFloat(amountRaw);
+                console.log('replenishBalance: amountRaw=', amountRaw, 'parsed=', amount);
+
+                if (isNaN(amount) || amount <= 0) {
+                    alert('Введите корректную сумму для пополнения');
+                    return;
+                }
+
+                const paySelect = document.querySelector('#replenishModal select');
+                if (paySelect && !paySelect.value) {
+                    alert('Выберите способ оплаты');
+                    return;
+                }
+
+                const user = JSON.parse(currentUser);
+
+                // Попробуем обновить баланс на сервере
+                const serverUrl = 'http://localhost:3000';
+                fetch(serverUrl + '/replenish', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ login: user.login, amount: amount })
+                }).then(async resp => {
+                    if (!resp.ok) throw new Error('server replenish failed');
+                    // синхронизируем локальную БД
+                    const usersResp = await fetch(serverUrl + '/users');
+                    if (usersResp.ok) {
+                        const text = await usersResp.text();
+                        localStorage.setItem('ghostToolsUsers', text);
+                    }
+                    // обновим currentUser
+                    const dbUsers = parseUsersDatabase(localStorage.getItem('ghostToolsUsers'));
+                    user.balance = dbUsers[user.login]?.balance || user.balance;
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    loadBalance();
+                    alert(`✅ Баланс пополнен на ${amount.toFixed(2)} ₽`);
+                    closeReplenishModal();
+                    document.getElementById('replenishAmount').value = '';
+                }).catch(err => {
+                    console.warn('replenish server failed, falling back to local', err);
+                    // локальный fallback
+                    let dbString = localStorage.getItem('ghostToolsUsers');
+                    if (!dbString) {
+                        const defaultUsers = [
+                            'admin admin123 5000.00',
+                            'testuser password123 1500.50',
+                            'player1 gamer2024 299.99',
+                            'pvp_pro secure_pass 0.00',
+                            'ghost_hunter mysecret 3200.00'
+                        ];
+                        dbString = defaultUsers.join('\n');
+                        localStorage.setItem('ghostToolsUsers', dbString);
+                    }
+                    const users = parseUsersDatabase(dbString);
+                    if (users[user.login]) {
+                        const newBalance = parseFloat(users[user.login].balance) + amount;
+                        updateUserBalance(user.login, newBalance);
+                        user.balance = newBalance;
+                        localStorage.setItem('currentUser', JSON.stringify(user));
+                        loadBalance();
+                    }
+                    alert(`✅ Баланс пополнен локально на ${amount} ₽`);
+                    closeReplenishModal();
+                    document.getElementById('replenishAmount').value = '';
+                });
+            } catch (err) {
+                console.error('replenishBalance error', err);
+                alert('Произошла ошибка при пополнении. Откройте консоль для деталей.');
+            }
+        }
+
+        // Синхронизировать currentUser с базой ghostToolsUsers (текстовый BD)
+        function syncCurrentUserFromDB() {
+            try {
+                const currentUserRaw = localStorage.getItem('currentUser');
+                if (!currentUserRaw) return;
+                const currentUser = JSON.parse(currentUserRaw);
+                const dbString = localStorage.getItem('ghostToolsUsers') || '';
+                if (!dbString) return;
+                const lines = dbString.split('\n').filter(l => l.trim());
+                for (const line of lines) {
+                    const parts = line.trim().split(' ');
+                    if (parts.length >= 3 && parts[0] === currentUser.login) {
+                        const dbBalance = parseFloat(parts[2]) || 0;
+                        // если балансы различаются, обновим currentUser
+                        const curBal = parseFloat(currentUser.balance) || 0;
+                        if (Math.abs(curBal - dbBalance) > 0.001) {
+                            currentUser.balance = dbBalance.toFixed(2);
+                            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                        }
+                        break;
+                    }
+                }
+            } catch (e) { console.warn('syncCurrentUserFromDB error', e); }
+        }
+
+        // Загрузка баланса (берём актуальное значение из currentUser, но при необходимости синхронизируем с DB)
+        function loadBalance() {
+            // Синхронизируем currentUser с текстовой БД перед отображением
+            syncCurrentUserFromDB();
+
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                document.getElementById('balance').textContent = parseFloat(user.balance || 0).toFixed(2) + ' ₽';
+            } else {
+                document.getElementById('balance').textContent = '0.00 ₽';
+            }
+        }
+
+        // Инициализация при загрузке
+        window.addEventListener('load', function() {
+            loadBalance();
+            updateHeaderAuth();
+        });
+
+        // Обновление кнопки авторизации в header
+        function updateHeaderAuth() {
+            const currentUser = localStorage.getItem('currentUser');
+            const btn = document.getElementById('headerAuthBtn');
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                btn.textContent = '👤 ' + user.login;
+                btn.onclick = () => window.location.href = 'account.html';
+            } else {
+                btn.textContent = '🔐 Вход';
+                btn.onclick = () => window.location.href = 'login.html';
+            }
+        }
+
+        // Обработчик клика по кнопке в header
+        function handleHeaderAuth() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                window.location.href = 'account.html';
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+    <script>
+        // Подсветка активной вкладки навигации
+        (function markActive(){
+            try{
+                const path = window.location.pathname.split('/').pop() || 'index.html';
+                document.querySelectorAll('nav a').forEach(a=>{
+                    const href = a.getAttribute('href');
+                    if(!href) return;
+                    if(href === path || (path === '' && href.includes('index.html'))) a.classList.add('active');
+                });
+            }catch(e){/* ignore */}
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход / Регистрация - Ghost Tools</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff006e;
+            --accent: #00d4ff;
+            --dark: #0a0a0a;
+            --text: #ffffff;
+            --gray: #1a1a1a;
+            --border: #222222;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--text);
+        }
+
+        .logo img {
+            height: 40px;
+            border-radius: 6px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .form-content {
+            display: none;
+        }
+
+        .form-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: #666;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            color: var(--dark);
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 6px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .success {
+            color: #00d4ff;
+            font-size: 13px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 6px;
+            display: none;
+        }
+
+        .success.show {
+            display: block;
+        }
+
+        .info {
+            text-align: center;
+            color: #aaa;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        .info a {
+            color: var(--accent);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .info a:hover {
+            color: var(--primary);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← На главную</a>
+
+        <div class="form-box">
+            <div class="logo">
+                <img src="logo.jpg" alt="Ghost Tools">
+                GHOST TOOLS
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('login')">Вход</button>
+                <button class="tab-btn" onclick="switchTab('register')">Регистрация</button>
+            </div>
+
+            <!-- Вход -->
+            <div id="login" class="form-content active">
+                <div class="error" id="loginError"></div>
+                <div class="success" id="loginSuccess"></div>
+
+                <div class="form-group">
+                    <label>Логин</label>
+                    <input type="text" id="loginUsername" placeholder="Ваш логин" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" id="loginPassword" placeholder="Ваш пароль" required>
+                </div>
+
+                <button class="btn" onclick="handleLogin()">Войти</button>
+
+                <div class="info">
+                    Нет аккаунта? <a onclick="switchTab('register')">Зарегистрируйтесь</a>
+                </div>
+            </div>
+
+            <!-- Регистрация -->
+            <div id="register" class="form-content">
+                <div class="error" id="registerError"></div>
+                <div class="success" id="registerSuccess"></div>
+
+                <div class="form-group">
+                    <label>Логин (минимум 3 символа)</label>
+                    <input type="text" id="regUsername" placeholder="Выберите логин" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Пароль (минимум 6 символов)</label>
+                    <input type="password" id="regPassword" placeholder="Придумайте пароль" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Подтвердите пароль</label>
+                    <input type="password" id="regPasswordConfirm" placeholder="Повторите пароль" required>
+                </div>
+
+                <button class="btn" onclick="handleRegister()">Зарегистрироваться</button>
+
+                <div class="info">
+                    Уже есть аккаунт? <a onclick="switchTab('login')">Войдите</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Загрузка БД из localStorage (симуляция файла BD.txt)
+        // Формат: "login password balance" (одна запись на строку)
+        function loadDatabase() {
+            let db = localStorage.getItem('ghostToolsUsers');
+            if (!db) {
+                // Инициализация БД с данными по умолчанию
+                const defaultUsers = [
+                    'admin admin123 5000.00',
+                    'testuser password123 1500.50',
+                    'player1 gamer2024 299.99',
+                    'pvp_pro secure_pass 0.00',
+                    'ghost_hunter mysecret 3200.00'
+                ];
+                db = defaultUsers.join('\n');
+                localStorage.setItem('ghostToolsUsers', db);
+            }
+            return db;
+        }
+
+        function parseDatabase(dbString) {
+            const lines = dbString.split('\n').filter(line => line.trim());
+            const users = {};
+            lines.forEach(line => {
+                const parts = line.trim().split(' ');
+                if (parts.length >= 3) {
+                    const login = parts[0];
+                    const password = parts[1];
+                    const balance = parseFloat(parts[2]) || 0;
+                    users[login] = { password, balance };
+                }
+            });
+            return users;
+        }
+
+        function saveDatabaseString(dbString) {
+            localStorage.setItem('ghostToolsUsers', dbString);
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.form-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            clearMessages();
+        }
+
+        function clearMessages() {
+            document.querySelectorAll('.error, .success').forEach(el => {
+                el.classList.remove('show');
+                el.textContent = '';
+            });
+        }
+
+        function showError(msg, form) {
+            const errorEl = document.getElementById(`${form}Error`);
+            errorEl.textContent = msg;
+            errorEl.classList.add('show');
+        }
+
+        function showSuccess(msg, form) {
+            const successEl = document.getElementById(`${form}Success`);
+            successEl.textContent = msg;
+            successEl.classList.add('show');
+        }
+
+        function handleRegister() {
+            clearMessages();
+            const username = document.getElementById('regUsername').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const passwordConfirm = document.getElementById('regPasswordConfirm').value;
+
+            // Валидация
+            if (!username || username.length < 3) {
+                showError('Логин должен быть минимум 3 символа', 'register');
+                return;
+            }
+            if (!password || password.length < 6) {
+                showError('Пароль должен быть минимум 6 символов', 'register');
+                return;
+            }
+            if (password !== passwordConfirm) {
+                showError('Пароли не совпадают', 'register');
+                return;
+            }
+
+            const dbString = loadDatabase();
+            const users = parseDatabase(dbString);
+
+            // Проверка, существует ли пользователь
+            if (users[username]) {
+                showError('Пользователь с таким логином уже существует', 'register');
+                return;
+            }
+            // Попробуем зарегистрировать пользователя на сервере
+            const payload = { login: username, password: password };
+            const serverUrl = 'http://localhost:3000';
+
+            fetch(serverUrl + '/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(async resp => {
+                if (!resp.ok) {
+                    if (resp.status === 409) {
+                        showError('Пользователь с таким логином уже существует', 'register');
+                        return;
+                    }
+                    showError('Ошибка сервера при регистрации', 'register');
+                    return;
+                }
+
+                // Синхронизируем локальную копию БД с сервером
+                try {
+                    const usersResp = await fetch(serverUrl + '/users');
+                    if (usersResp.ok) {
+                        const text = await usersResp.text();
+                        saveDatabaseString(text);
+                    }
+                } catch (e) {
+                    console.warn('Не удалось синхронизировать локальную БД с сервером', e);
+                }
+
+                showSuccess('✅ Аккаунт создан на сервере! Войдите в систему.', 'register');
+                document.getElementById('regUsername').value = '';
+                document.getElementById('regPassword').value = '';
+                document.getElementById('regPasswordConfirm').value = '';
+
+                setTimeout(() => {
+                    switchTab('login');
+                }, 1200);
+
+            }).catch(err => {
+                console.error('register fetch error', err);
+                // Фоллбек: если сервер недоступен, запишем локально
+                const newLine = `${username} ${password} 0.00`;
+                const updatedDB = dbString + '\n' + newLine;
+                saveDatabaseString(updatedDB);
+                showSuccess('✅ Аккаунт создан локально (сервер недоступен).', 'register');
+                document.getElementById('regUsername').value = '';
+                document.getElementById('regPassword').value = '';
+                document.getElementById('regPasswordConfirm').value = '';
+                setTimeout(() => switchTab('login'), 1000);
+            });
+        }
+
+        function handleLogin() {
+            clearMessages();
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!username || !password) {
+                showError('Введите логин и пароль', 'login');
+                return;
+            }
+
+            // Попробуем авторизоваться на сервере
+            const serverUrl = 'http://localhost:3000';
+            fetch(serverUrl + '/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ login: username, password: password })
+            }).then(async resp => {
+                if (!resp.ok) {
+                    if (resp.status === 401) showError('Неверный логин или пароль', 'login');
+                    else showError('Ошибка сервера при входе', 'login');
+                    return;
+                }
+                const data = await resp.json();
+                const user = { login: data.user.login, balance: data.user.balance };
+                localStorage.setItem('currentUser', JSON.stringify(user));
+
+                // Синхронизируем локальную БД
+                try {
+                    const usersResp = await fetch(serverUrl + '/users');
+                    if (usersResp.ok) {
+                        const text = await usersResp.text();
+                        saveDatabaseString(text);
+                    }
+                } catch (e) { console.warn('sync users failed', e); }
+
+                showSuccess('✅ Вход выполнен!', 'login');
+                setTimeout(() => window.location.href = 'account.html', 800);
+            }).catch(err => {
+                console.error('login fetch error', err);
+                // Фоллбек: локальная проверка
+                const dbString = loadDatabase();
+                const users = parseDatabase(dbString);
+                if (!users[username] || users[username].password !== password) {
+                    showError('Неверный логин или пароль', 'login');
+                    return;
+                }
+                const user = { login: username, balance: users[username].balance };
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                showSuccess('✅ Вход выполнен локально!', 'login');
+                setTimeout(() => window.location.href = 'account.html', 800);
+            });
+        }
+
+        // Инициализация БД при загрузке
+        loadDatabase();
+
+        // Если пользователь уже авторизован, перенаправить на аккаунт
+        if (localStorage.getItem('currentUser')) {
+            window.location.href = 'account.html';
+        }
+    </script>
+</body>
+</html>
